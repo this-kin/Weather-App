@@ -22,6 +22,8 @@ class MyApp extends AppMVC {
       statusBarBrightness: Brightness.dark,
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarDividerColor: Colors.transparent,
     ));
     return Phoenix(
       child: ScreenUtilInit(
@@ -30,7 +32,7 @@ class MyApp extends AppMVC {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Splash(),
-            theme: themeData,
+            theme: CustomTheme.themeData(),
             onGenerateRoute: RouteGenerator.generateRoute,
           );
         },

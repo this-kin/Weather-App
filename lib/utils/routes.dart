@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/modules/home/home.dart';
+import 'package:weather_app/modules/search/search.dart';
+import 'package:weather_app/modules/settings/setting.dart';
 import 'package:weather_app/modules/splash/splash.dart';
 
 class RouteGenerator {
@@ -10,10 +12,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Splash());
       case '/home':
         return MaterialPageRoute(builder: (_) => Home());
-      // case '/home':
-      //   return MaterialPageRoute(builder: (_) => Home());
-      // case '/home':
-      //   return MaterialPageRoute(builder: (_) => Home());
+      case '/search':
+        return MaterialPageRoute(builder: (_) => Search());
+      case '/setting':
+        return MaterialPageRoute(builder: (_) => Setting());
     }
   }
 }

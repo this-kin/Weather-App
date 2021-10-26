@@ -19,66 +19,123 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
-          child: Column(
-            children: [
-              ListTile(
-                title: Text(
-                  "Today, 15 Dec",
-                  style: kAppbarThin.copyWith(
-                    fontFamily: ConstanceData.kohoRegular,
+        child: Stack(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text(
+                      "Today, 15 Dec",
+                      style: kAppbarThin.copyWith(
+                        fontFamily: ConstanceData.kohoRegular,
+                      ),
+                    ),
+                    subtitle: Text(
+                      "Surakarta",
+                      style: kAppbarBold.copyWith(
+                        fontFamily: ConstanceData.kohoBold,
+                      ),
+                    ),
+                    trailing: UserAvatar(
+                      imageUrl: ConstanceData.man,
+                    ),
                   ),
-                ),
-                subtitle: Text(
-                  "Surakarta",
-                  style: kAppbarBold.copyWith(
-                    fontFamily: ConstanceData.kohoBold,
+                  SizedBox(height: 10.h),
+                  todayWidget(),
+                  SizedBox(height: 10.h),
+                  Center(
+                    child: GradientText(
+                      "Cloudy",
+                      gradient: Gradients.buildGradient(
+                          Alignment.topLeft, Alignment.bottomCenter, [
+                        theme.primaryColor.withOpacity(0.3),
+                        theme.primaryColor,
+                      ]),
+                      shaderRect: Rect.fromLTRB(50, 30, 0, 0),
+                      style: TextStyle(
+                        fontSize: 50.sp,
+                        color: theme.primaryColor,
+                        fontFamily: ConstanceData.kohoBold,
+                      ),
+                    ),
                   ),
-                ),
-                trailing: UserAvatar(
-                  imageUrl: ConstanceData.man,
-                ),
-              ),
-              SizedBox(height: 20.h),
-              todayWidget(),
-              SizedBox(height: 30.h),
-              Center(
-                child: GradientText(
-                  "Cloudy",
-                  gradient: Gradients.buildGradient(
-                      Alignment.topLeft, Alignment.bottomCenter, [
-                    theme.primaryColor.withOpacity(0.3),
-                    theme.primaryColor,
-                  ]),
-                  shaderRect: Rect.fromLTRB(50, 30, 0, 0),
-                  style: TextStyle(
-                    fontSize: 50.sp,
-                    color: theme.primaryColor,
-                    fontFamily: ConstanceData.kohoBold,
-                  ),
-                ),
-              ),
-              SizedBox(height: 20.h),
-              Flexible(
-                  child: Wrap(
+                  SizedBox(height: 10.h),
+                  Flexible(
+                    child: Wrap(
                       spacing: 20.w,
                       alignment: WrapAlignment.center,
                       children: [
-                    weatherInfo(title: "Wind", value: "234"),
-                    myDivider(),
-                    weatherInfo(title: "Temp", value: "30°C"),
-                    myDivider(),
-                    weatherInfo(title: "Humidity", value: "25%")
-                  ]))
-            ],
-          ),
+                        weatherInfo(title: "Wind", value: "234"),
+                        myDivider(),
+                        weatherInfo(title: "Temp", value: "30°C"),
+                        myDivider(),
+                        weatherInfo(title: "Humidity", value: "25%")
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned.fill(
+              child: DraggableScrollableSheet(
+                minChildSize: 0.44,
+                maxChildSize: 1.0,
+                builder: (_, controller) {
+                  return Material(
+                    elevation: 1,
+                    color: theme.primaryColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12.sp),
+                      topRight: Radius.circular(12.sp),
+                    ),
+                    child: SingleChildScrollView(
+                      controller: controller,
+                      child: Container(
+                        padding:
+                            EdgeInsets.only(left: 15.w, right: 15.w, top: 10.h),
+                        child: Column(
+                          children: [
+                            sheetDivider(),
+                            SizedBox(height: 50),
+                            SizedBox(height: 50),
+                            SizedBox(height: 50),
+                            SizedBox(height: 50),
+                            SizedBox(height: 50),
+                            SizedBox(height: 50),
+                            SizedBox(height: 50),
+                            SizedBox(height: 50),
+                            SizedBox(height: 50),
+                            SizedBox(height: 50),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  myDivider() {
+  Widget sheetDivider() {
+    return Center(
+      child: Container(
+        height: 5.h,
+        width: 50.w,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(2.sp),
+          color: Colors.deepPurpleAccent.withOpacity(0.8),
+        ),
+      ),
+    );
+  }
+
+  Widget myDivider() {
     return Padding(
       padding: EdgeInsets.all(5.h),
       child: Container(
@@ -89,7 +146,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  weatherInfo({title, value}) {
+  Widget weatherInfo({title, value}) {
     return Column(
       children: [
         Text(
@@ -110,11 +167,11 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Center todayWidget() {
+  Widget todayWidget() {
     return Center(
       child: Container(
-        height: 250.h,
-        width: 250.w,
+        height: 200.h,
+        width: 200.w,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(ConstanceData.cloudy),
