@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:weather_app/modules/home/widgets/forecast_widget.dart';
 import 'package:weather_app/modules/home/widgets/user_avatar.dart';
 import 'package:weather_app/utils/constance.dart';
 import 'package:weather_app/utils/theme.dart';
@@ -42,9 +43,9 @@ class _HomeState extends State<Home> {
                       imageUrl: ConstanceData.man,
                     ),
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 15.h),
                   todayWidget(),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 15.h),
                   Center(
                     child: GradientText(
                       "Cloudy",
@@ -61,7 +62,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 20.h),
                   Flexible(
                     child: Wrap(
                       spacing: 20.w,
@@ -80,7 +81,7 @@ class _HomeState extends State<Home> {
             ),
             Positioned.fill(
               child: DraggableScrollableSheet(
-                minChildSize: 0.44,
+                minChildSize: 0.40,
                 maxChildSize: 1.0,
                 builder: (_, controller) {
                   return Material(
@@ -98,16 +99,30 @@ class _HomeState extends State<Home> {
                         child: Column(
                           children: [
                             sheetDivider(),
-                            SizedBox(height: 50),
-                            SizedBox(height: 50),
-                            SizedBox(height: 50),
-                            SizedBox(height: 50),
-                            SizedBox(height: 50),
-                            SizedBox(height: 50),
-                            SizedBox(height: 50),
-                            SizedBox(height: 50),
-                            SizedBox(height: 50),
-                            SizedBox(height: 50),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Today",
+                                  style: styleTxt(theme),
+                                ),
+                                Text(
+                                  "Next 7 days >",
+                                  style: styleTxt(theme),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 30.h),
+                            Container(
+                              height: 110.h,
+                              child: ListView.builder(
+                                  itemCount: 7,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (_, index) {
+                                    return ForecastWidget();
+                                  }),
+                            ),
+                            SizedBox(height: 20.h),
                           ],
                         ),
                       ),
@@ -119,6 +134,15 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+    );
+  }
+
+  TextStyle styleTxt(ThemeData theme) {
+    return TextStyle(
+      fontFamily: ConstanceData.kohoRegular,
+      color: theme.backgroundColor,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w500,
     );
   }
 

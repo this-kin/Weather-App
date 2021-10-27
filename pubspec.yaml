@@ -25,6 +25,7 @@ dependencies:
   gradient_widgets: ^0.6.0
   sliding_up_panel: ^2.0.0+1
   flutter_phoenix: ^1.0.0
+  fluttericon: ^2.0.0
 
 dev_dependencies:
   flutter_test:
