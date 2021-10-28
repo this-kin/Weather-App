@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttericon/entypo_icons.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:weather_app/modules/home/widgets/forecast_widget.dart';
 import 'package:weather_app/modules/home/widgets/user_avatar.dart';
+import 'package:weather_app/modules/search/search.dart';
+import 'package:weather_app/modules/settings/setting.dart';
 import 'package:weather_app/utils/constance.dart';
 import 'package:weather_app/utils/theme.dart';
 
@@ -14,9 +18,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //to keep track of active page
+  int _selectedIndex = 0;
+
+  //list of pages
+  List<Widget> _pages = [Home(), Search(), Setting()];
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       body: SafeArea(
@@ -99,6 +110,7 @@ class _HomeState extends State<Home> {
                         child: Column(
                           children: [
                             sheetDivider(),
+                            SizedBox(height: 20.h),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -123,6 +135,51 @@ class _HomeState extends State<Home> {
                                   }),
                             ),
                             SizedBox(height: 20.h),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20.sp),
+                              child: GNav(
+                                // rippleColor: Colors.grey.shade700, onclick color
+                                hoverColor: Colors.red.shade700,
+                                haptic: true,
+                                backgroundColor: theme.backgroundColor,
+                                activeColor: Colors.blueGrey.withOpacity(0.5),
+                                iconSize: 28.sp,
+                                gap: 10,
+                                curve: Curves.bounceInOut,
+                                duration: const Duration(milliseconds: 400),
+                                color: Colors.grey.withOpacity(0.5),
+                                tabs: [
+                                  GButton(
+                                    icon: Entypo.home,
+                                    text: "Home",
+                                  ),
+                                  GButton(
+                                    icon: Entypo.search,
+                                    text: "Search",
+                                  ),
+                                  GButton(
+                                    icon: Icons.settings,
+                                    text: "Settings",
+                                  ),
+                                ],
+                                selectedIndex: _selectedIndex,
+                                onTabChange: (index) {
+                                  setState(() {
+                                    _selectedIndex = index;
+                                    if (index == 0) {
+                                      //do nothing to avoid page rebuild
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (_) {
+                                          return _pages[index];
+                                        }),
+                                      );
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
                           ],
                         ),
                       ),

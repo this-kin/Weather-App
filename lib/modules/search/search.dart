@@ -10,6 +10,9 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    var theme = Theme.of(context);
+    return Scaffold(
+      backgroundColor: theme.backgroundColor,
+    );
   }
 }
