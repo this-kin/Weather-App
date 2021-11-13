@@ -25,9 +25,12 @@ class CustomTheme {
     return ThemeData(
       iconTheme: IconThemeData(color: Colors.white),
       backgroundColor: kBackGroundColor,
+      scaffoldBackgroundColor: kBackGroundColor,
       primaryColor: kPrimaryColor,
       accentColor: kAccentColor,
       canvasColor: Colors.transparent,
+      platform: TargetPlatform.iOS,
+      //  textTheme: textTheme,
     );
   }
 }

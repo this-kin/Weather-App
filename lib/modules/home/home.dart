@@ -24,6 +24,12 @@ class _HomeState extends State<Home> {
   //list of pages
   List<Widget> _pages = [Home(), Search(), Setting()];
 
+  // @override
+  // void initState() {
+  //   _selectedIndex = 0;
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -148,6 +154,7 @@ class _HomeState extends State<Home> {
                                 curve: Curves.bounceInOut,
                                 duration: const Duration(milliseconds: 400),
                                 color: Colors.grey.withOpacity(0.5),
+
                                 tabs: [
                                   GButton(
                                     icon: Entypo.home,
