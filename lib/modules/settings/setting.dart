@@ -79,7 +79,12 @@ class _SettingState extends State<Setting> {
                 child: ListTile(
                   leading: Icon(Icons.location_on_outlined),
                   title: Text("Change Location"),
-                  subtitle: Text("Lagos NG"),
+                  subtitle: Text(
+                    "Lagos NG",
+                    style: theme.textTheme.caption!.copyWith(
+                      color: theme.accentColor,
+                    ),
+                  ),
                 ),
               ),
             ),

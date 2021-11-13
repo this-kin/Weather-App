@@ -30,6 +30,7 @@ class MyApp extends AppMVC {
         designSize: Size(375, 825),
         builder: () {
           return MaterialApp(
+            title: "Weather App",
             debugShowCheckedModeBanner: false,
             home: Splash(),
             theme: CustomTheme.themeData(),

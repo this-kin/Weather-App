@@ -24,12 +24,6 @@ class _HomeState extends State<Home> {
   //list of pages
   List<Widget> _pages = [Home(), Search(), Setting()];
 
-  // @override
-  // void initState() {
-  //   _selectedIndex = 0;
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -98,8 +92,8 @@ class _HomeState extends State<Home> {
             ),
             Positioned.fill(
               child: DraggableScrollableSheet(
-                minChildSize: 0.40,
-                maxChildSize: 1.0,
+                minChildSize: 0.40.h,
+                maxChildSize: 0.95.h,
                 builder: (_, controller) {
                   return Material(
                     elevation: 1,
@@ -122,11 +116,11 @@ class _HomeState extends State<Home> {
                               children: [
                                 Text(
                                   "Today",
-                                  style: styleTxt(theme),
+                                  style: theme.textTheme.caption,
                                 ),
                                 Text(
                                   "Next 7 days >",
-                                  style: styleTxt(theme),
+                                  style: theme.textTheme.caption,
                                 ),
                               ],
                             ),
@@ -147,6 +141,7 @@ class _HomeState extends State<Home> {
                                 // rippleColor: Colors.grey.shade700, onclick color
                                 hoverColor: Colors.red.shade700,
                                 haptic: true,
+                                textStyle: theme.textTheme.button,
                                 backgroundColor: theme.backgroundColor,
                                 activeColor: Colors.blueGrey.withOpacity(0.5),
                                 iconSize: 28.sp,
@@ -198,15 +193,6 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-    );
-  }
-
-  TextStyle styleTxt(ThemeData theme) {
-    return TextStyle(
-      fontFamily: ConstanceData.kohoRegular,
-      color: theme.backgroundColor,
-      fontSize: 15.sp,
-      fontWeight: FontWeight.w500,
     );
   }
 

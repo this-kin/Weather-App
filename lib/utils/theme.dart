@@ -9,17 +9,28 @@ const Color kBackGroundColor = Color(0xffF4F7FE);
 class CustomTheme {
   //light theme
   static TextTheme textTheme = TextTheme(
-    bodyText1: TextStyle(
-      fontSize: 30.sp,
-      color: kAccentColor,
-      fontFamily: ConstanceData.kohoBold,
-    ),
-    bodyText2: TextStyle(
-      fontSize: 25.sp,
-      color: kAccentColor,
-      fontFamily: ConstanceData.kohoRegular,
-    ),
-  );
+      bodyText1: TextStyle(
+        fontSize: 30.sp,
+        color: kAccentColor,
+        fontFamily: ConstanceData.kohoBold,
+      ),
+      bodyText2: TextStyle(
+        fontSize: 25.sp,
+        color: kAccentColor,
+        fontFamily: ConstanceData.kohoRegular,
+      ),
+      caption: TextStyle(
+        fontFamily: ConstanceData.kohoRegular,
+        color: Colors.white,
+        fontSize: 15.sp,
+        fontWeight: FontWeight.w500,
+      ),
+      button: TextStyle(
+        fontFamily: ConstanceData.kohoRegular,
+        color: kAccentColor,
+        fontSize: 15.sp,
+        fontWeight: FontWeight.w200,
+      ));
 
   static ThemeData themeData() {
     return ThemeData(
@@ -30,7 +41,7 @@ class CustomTheme {
       accentColor: kAccentColor,
       canvasColor: Colors.transparent,
       platform: TargetPlatform.iOS,
-      //  textTheme: textTheme,
+      textTheme: textTheme,
     );
   }
 }
