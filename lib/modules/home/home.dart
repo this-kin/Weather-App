@@ -4,6 +4,7 @@ import 'package:fluttericon/entypo_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:weather_app/modules/home/widgets/forecast_widget.dart';
+import 'package:weather_app/modules/home/widgets/uncollapsed.dart';
 import 'package:weather_app/modules/home/widgets/user_avatar.dart';
 import 'package:weather_app/modules/search/search.dart';
 import 'package:weather_app/modules/settings/setting.dart';
@@ -20,6 +21,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   //to keep track of active page
   int _selectedIndex = 0;
+
+  //tracks the scroll activities of the bottom sheet
+
+  double _percentage = 0;
 
   //list of pages
   List<Widget> _pages = [Home(), Search(), Setting()];
@@ -91,103 +96,117 @@ class _HomeState extends State<Home> {
               ),
             ),
             Positioned.fill(
-              child: DraggableScrollableSheet(
-                minChildSize: 0.40.h,
-                maxChildSize: 0.95.h,
-                builder: (_, controller) {
-                  return Material(
-                    elevation: 1,
-                    color: theme.primaryColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12.sp),
-                      topRight: Radius.circular(12.sp),
-                    ),
-                    child: SingleChildScrollView(
-                      controller: controller,
-                      child: Container(
-                        padding:
-                            EdgeInsets.only(left: 15.w, right: 15.w, top: 10.h),
-                        child: Column(
-                          children: [
-                            sheetDivider(),
-                            SizedBox(height: 20.h),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Today",
-                                  style: theme.textTheme.caption,
-                                ),
-                                Text(
-                                  "Next 7 days >",
-                                  style: theme.textTheme.caption,
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 30.h),
-                            Container(
-                              height: 110.h,
-                              child: ListView.builder(
-                                  itemCount: 7,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (_, index) {
-                                    return ForecastWidget();
-                                  }),
-                            ),
-                            SizedBox(height: 20.h),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20.sp),
-                              child: GNav(
-                                // rippleColor: Colors.grey.shade700, onclick color
-                                hoverColor: Colors.red.shade700,
-                                haptic: true,
-                                textStyle: theme.textTheme.button,
-                                backgroundColor: theme.backgroundColor,
-                                activeColor: Colors.blueGrey.withOpacity(0.5),
-                                iconSize: 28.sp,
-                                gap: 10,
-                                curve: Curves.bounceInOut,
-                                duration: const Duration(milliseconds: 400),
-                                color: Colors.grey.withOpacity(0.5),
-
-                                tabs: [
-                                  GButton(
-                                    icon: Entypo.home,
-                                    text: "Home",
-                                  ),
-                                  GButton(
-                                    icon: Entypo.search,
-                                    text: "Search",
-                                  ),
-                                  GButton(
-                                    icon: Icons.settings,
-                                    text: "Settings",
-                                  ),
-                                ],
-                                selectedIndex: _selectedIndex,
-                                onTabChange: (index) {
-                                  setState(() {
-                                    _selectedIndex = index;
-                                    if (index == 0) {
-                                      //do nothing to avoid page rebuild
-                                    } else {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (_) {
-                                          return _pages[index];
-                                        }),
-                                      );
-                                    }
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
+              child: NotificationListener<DraggableScrollableNotification>(
+                onNotification: (notification) {
+                  _percentage = 2 * notification.extent;
+                  print(_percentage);
+                  return true;
                 },
+                child: DraggableScrollableSheet(
+                  minChildSize: 0.40.h,
+                  maxChildSize: 0.95.h,
+                  builder: (_, controller) {
+                    return Material(
+                      elevation: 1,
+                      color: theme.primaryColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12.sp),
+                        topRight: Radius.circular(12.sp),
+                      ),
+                      child: SingleChildScrollView(
+                        controller: controller,
+                        child: _percentage < 1
+                            ? Container(
+                                padding: EdgeInsets.only(
+                                    left: 15.w, right: 15.w, top: 10.h),
+                                child: Column(
+                                  children: [
+                                    sheetDivider(),
+                                    SizedBox(height: 20.h),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Today",
+                                          style: theme.textTheme.caption,
+                                        ),
+                                        Text(
+                                          "Next 7 days >",
+                                          style: theme.textTheme.caption,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 30.h),
+                                    Container(
+                                      height: 110.h,
+                                      child: ListView.builder(
+                                          itemCount: 7,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (_, index) {
+                                            return ForecastWidget();
+                                          }),
+                                    ),
+                                    SizedBox(height: 20.h),
+                                    ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.circular(20.sp),
+                                      child: GNav(
+                                        // rippleColor: Colors.grey.shade700, onclick color
+                                        hoverColor: Colors.red.shade700,
+                                        haptic: true,
+                                        textStyle: theme.textTheme.button,
+                                        backgroundColor: theme.backgroundColor,
+                                        activeColor:
+                                            Colors.blueGrey.withOpacity(0.5),
+                                        iconSize: 28.sp,
+                                        gap: 10,
+                                        curve: Curves.bounceInOut,
+                                        duration:
+                                            const Duration(milliseconds: 400),
+                                        color: Colors.grey.withOpacity(0.5),
+
+                                        tabs: [
+                                          GButton(
+                                            icon: Entypo.home,
+                                            text: "Home",
+                                          ),
+                                          GButton(
+                                            icon: Entypo.search,
+                                            text: "Search",
+                                          ),
+                                          GButton(
+                                            icon: Icons.settings,
+                                            text: "Settings",
+                                          ),
+                                        ],
+                                        selectedIndex: _selectedIndex,
+                                        onTabChange: (index) {
+                                          setState(() {
+                                            _selectedIndex = index;
+                                            if (index == 0) {
+                                              //do nothing to avoid page rebuild
+                                            } else {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(builder: (_) {
+                                                  return _pages[index];
+                                                }),
+                                              );
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(height: 10.h),
+                                  ],
+                                ),
+                              )
+                            : Uncollapsed(),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ],
