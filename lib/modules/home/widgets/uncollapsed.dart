@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/models/other_model.dart';
@@ -12,15 +13,15 @@ class Uncollapsed extends StatefulWidget {
 }
 
 class _UncollapsedState extends State<Uncollapsed> {
+  List<Color> gradientColors = [
+    Colors.deepPurpleAccent,
+  ];
+
   //
   int _selectedDay = 0;
 
   //weather info
   List<String> weather = ["Temperature", "Wind", "Humidity"];
-
-  //week day
-
-  List<String> weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu"];
 
   @override
   Widget build(BuildContext context) {
@@ -44,38 +45,15 @@ class _UncollapsedState extends State<Uncollapsed> {
               ),
             ),
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 30.h),
           Container(
             height: 200.h,
-            color: Colors.amberAccent,
-          ),
-          SizedBox(height: 20.h),
-          Wrap(
-            alignment: WrapAlignment.start,
-            children: List.generate(
-                weekDays.length,
-                (index) => AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      height: 35.h,
-                      width: 60.w,
-                      decoration: BoxDecoration(
-                          color: _selectedDay == index
-                              ? Colors.deepPurpleAccent
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(20.sp)),
-                      alignment: Alignment.center,
-                      child: Center(
-                        child: Text(
-                          weekDays[index],
-                          style: TextStyle(
-                            color: _selectedDay == index
-                                ? theme.backgroundColor
-                                : Colors.deepPurpleAccent,
-                            fontSize: 18.sp,
-                          ),
-                        ),
-                      ),
-                    )),
+            child: AspectRatio(
+              aspectRatio: 1.7,
+              child: LineChart(
+                mainData(),
+              ),
+            ),
           ),
           SizedBox(height: 20.h),
           Row(
@@ -228,6 +206,120 @@ class _UncollapsedState extends State<Uncollapsed> {
             fontWeight: FontWeight.bold,
           ),
         )
+      ],
+    );
+  }
+
+  LineChartData mainData() {
+    return LineChartData(
+      gridData: FlGridData(
+        show: false,
+        drawVerticalLine: false,
+        getDrawingHorizontalLine: (value) {
+          return FlLine(
+            color: Colors.transparent,
+            strokeWidth: 1,
+          );
+        },
+        getDrawingVerticalLine: (value) {
+          return FlLine(
+            color: Colors.deepPurpleAccent,
+            strokeWidth: 1,
+          );
+        },
+      ),
+      titlesData: FlTitlesData(
+        show: true,
+        rightTitles: SideTitles(showTitles: false),
+        topTitles: SideTitles(showTitles: false),
+        bottomTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 40,
+          interval: 1.1,
+          getTextStyles: (context, value) =>
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 17),
+          getTitles: (value) {
+            switch (value.toInt()) {
+              case 1:
+                return 'Sun';
+              case 2:
+                return 'Mon';
+              case 3:
+                return 'Tue';
+              case 4:
+                return 'Wed';
+              case 5:
+                return 'Thur';
+              case 6:
+                return 'Fri';
+              case 7:
+                return 'Sat';
+            }
+            return '';
+          },
+          margin: 15,
+        ),
+        leftTitles: SideTitles(
+          showTitles: false,
+          interval: 1,
+          getTextStyles: (context, value) => const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),
+          getTitles: (value) {
+            switch (value.toInt()) {
+              case 1:
+                return '10°';
+              case 3:
+                return '30°';
+              case 5:
+                return '50°';
+            }
+            return '';
+          },
+          reservedSize: 40,
+          margin: 20,
+        ),
+      ),
+      borderData: FlBorderData(
+        show: false,
+        border: Border.all(color: const Color(0xff37434d), width: 1),
+      ),
+      minX: 0,
+      maxX: 9,
+      minY: 0,
+      maxY: 6,
+      lineBarsData: [
+        LineChartBarData(
+          spots: [
+            FlSpot(0, 3),
+            FlSpot(1.5, 3),
+            FlSpot(3.5, 5),
+            FlSpot(5, 3),
+            FlSpot(6.5, 4),
+            FlSpot(8, 2.8),
+            FlSpot(9, 3),
+          ],
+          isCurved: true,
+          colors: gradientColors,
+          barWidth: 2.5,
+          isStrokeCapRound: true,
+          dotData: FlDotData(
+            show: false,
+          ),
+          belowBarData: BarAreaData(
+            //applyCutOffY: true,
+            //cutOffY: 100,
+            gradientFrom: const Offset(100, 10),
+            gradientTo: const Offset(100, 100),
+            show: true,
+            colors: [
+              Colors.indigo.withOpacity(0.1),
+              Colors.indigo,
+            ],
+          ),
+        ),
       ],
     );
   }
