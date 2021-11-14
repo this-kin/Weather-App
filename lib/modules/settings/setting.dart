@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttericon/entypo_icons.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:weather_app/utils/constance.dart';
 
 class Setting extends StatefulWidget {
@@ -39,8 +40,19 @@ class _SettingState extends State<Setting> {
                 height: 50.h,
                 child: ListTile(
                   leading: Icon(Icons.language),
-                  title: Text("Language"),
-                  subtitle: Text("English"),
+                  title: Text(
+                    "Language",
+                    style: theme.textTheme.bodyText2!.copyWith(
+                      color: theme.accentColor,
+                      fontSize: 18.sp,
+                    ),
+                  ),
+                  subtitle: Text(
+                    "English",
+                    style: theme.textTheme.button!.copyWith(
+                      color: theme.accentColor,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -49,8 +61,14 @@ class _SettingState extends State<Setting> {
               child: Container(
                 height: 50.h,
                 child: ListTile(
-                  leading: Icon(Entypo.bell),
-                  title: Text("Daily Notification"),
+                  leading: Icon(FontAwesome5.bell),
+                  title: Text(
+                    "Daily Notification",
+                    style: theme.textTheme.bodyText2!.copyWith(
+                      color: theme.accentColor,
+                      fontSize: 18.sp,
+                    ),
+                  ),
                   trailing: Switch(
                       activeColor: theme.primaryColor,
                       value: false,
@@ -66,7 +84,13 @@ class _SettingState extends State<Setting> {
                 height: 50.h,
                 child: ListTile(
                   leading: Icon(Icons.location_on_outlined),
-                  title: Text("Change Location"),
+                  title: Text(
+                    "Change Location",
+                    style: theme.textTheme.bodyText2!.copyWith(
+                      color: theme.accentColor,
+                      fontSize: 18.sp,
+                    ),
+                  ),
                   subtitle: Text(
                     "Lagos NG",
                     style: theme.textTheme.caption!.copyWith(
@@ -81,8 +105,14 @@ class _SettingState extends State<Setting> {
               child: Container(
                 height: 50.h,
                 child: ListTile(
-                  leading: Icon(Icons.report_problem_outlined),
-                  title: Text("Report A Problem"),
+                  leading: Icon(Icons.report_problem_sharp),
+                  title: Text(
+                    "Report A Problem",
+                    style: theme.textTheme.bodyText2!.copyWith(
+                      color: theme.accentColor,
+                      fontSize: 18.sp,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -92,7 +122,13 @@ class _SettingState extends State<Setting> {
                 height: 50.h,
                 child: ListTile(
                   leading: Icon(Icons.logout_outlined),
-                  title: Text("Logout"),
+                  title: Text(
+                    "Logout",
+                    style: theme.textTheme.bodyText2!.copyWith(
+                      color: theme.accentColor,
+                      fontSize: 18.sp,
+                    ),
+                  ),
                 ),
               ),
             )

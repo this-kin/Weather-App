@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather_app/models/other_model.dart';
 import 'package:weather_app/modules/more/more.dart';
 import 'package:weather_app/utils/constance.dart';
 
@@ -105,20 +106,94 @@ class _UncollapsedState extends State<Uncollapsed> {
           ),
           SizedBox(height: 20.h),
           Container(
-            height: 250.h,
+            height: 300.h,
             width: double.infinity,
             child: ListView.builder(
-                itemCount: 3,
-                itemBuilder: (_, index) {
-                  return Container(
-                    height: 100.h,
-                    width: 300.w,
-                    decoration: BoxDecoration(
-                      color: Colors.deepPurpleAccent,
-                      borderRadius: BorderRadius.circular(20.sp),
-                    ),
-                  );
-                }),
+              itemCount: allOther.length,
+              itemBuilder: (_, index) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.h,
+                  ),
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: 130.h,
+                        width: 320.w,
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurpleAccent,
+                          borderRadius: BorderRadius.circular(30.sp),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 30.w, vertical: 15.h),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Location",
+                                style: theme.textTheme.headline2!.copyWith(
+                                  fontSize: 14.sp,
+                                )),
+                            SizedBox(height: 5.h),
+                            Text(
+                              allOther[index].city,
+                              style: theme.textTheme.bodyText1!.copyWith(
+                                color: theme.backgroundColor,
+                                fontSize: 28.sp,
+                              ),
+                            ),
+                            SizedBox(height: 10.h),
+                            Wrap(
+                              spacing: 15.w,
+                              alignment: WrapAlignment.center,
+                              children: [
+                                weatherInfo(
+                                    title: "Temp",
+                                    value: allOther[index].minTemp,
+                                    textTheme: theme.textTheme),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 5.h),
+                                  child: Container(
+                                    height: 25.h,
+                                    width: 1.w,
+                                    color: Colors.deepPurple,
+                                  ),
+                                ),
+                                weatherInfo(
+                                    title: "Wind",
+                                    value: allOther[index].wind,
+                                    textTheme: theme.textTheme),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 5),
+                                  child: Container(
+                                    height: 25.h,
+                                    width: 1.w,
+                                    color: Colors.deepPurple,
+                                  ),
+                                ),
+                                weatherInfo(
+                                    title: "Temp",
+                                    value: allOther[index].maxTemp,
+                                    textTheme: theme.textTheme)
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 130.h,
+                        width: double.infinity,
+                        alignment: Alignment.centerRight,
+                        child: Image.asset(
+                          allOther[index].image,
+                          height: 100.h,
+                          width: 100.w,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           )
         ],
       ),
@@ -135,6 +210,25 @@ class _UncollapsedState extends State<Uncollapsed> {
           color: Colors.deepPurpleAccent.withOpacity(0.8),
         ),
       ),
+    );
+  }
+
+  Widget weatherInfo({title, value, TextTheme? textTheme}) {
+    return Column(
+      children: [
+        Text(title,
+            style: textTheme!.headline2!.copyWith(
+              fontSize: 14.sp,
+            )),
+        Text(
+          value,
+          style: textTheme.bodyText2!.copyWith(
+            fontSize: 18.sp,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        )
+      ],
     );
   }
 }

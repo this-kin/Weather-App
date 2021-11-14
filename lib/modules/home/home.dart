@@ -45,14 +45,13 @@ class _HomeState extends State<Home> {
                   ListTile(
                     title: Text(
                       "Today, 15 Dec",
-                      style: kAppbarThin.copyWith(
-                        fontFamily: ConstanceData.kohoRegular,
-                      ),
+                      style: theme.textTheme.bodyText2!,
                     ),
                     subtitle: Text(
                       "Surakarta",
-                      style: kAppbarBold.copyWith(
-                        fontFamily: ConstanceData.kohoBold,
+                      style: theme.textTheme.bodyText1!.copyWith(
+                        fontSize: 30.sp,
+                        color: theme.accentColor,
                       ),
                     ),
                     trailing: UserAvatar(
@@ -71,11 +70,7 @@ class _HomeState extends State<Home> {
                         theme.primaryColor,
                       ]),
                       shaderRect: Rect.fromLTRB(50, 30, 0, 0),
-                      style: TextStyle(
-                        fontSize: 50.sp,
-                        color: theme.primaryColor,
-                        fontFamily: ConstanceData.kohoBold,
-                      ),
+                      style: theme.textTheme.bodyText1!,
                     ),
                   ),
                   SizedBox(height: 20.h),
@@ -84,11 +79,20 @@ class _HomeState extends State<Home> {
                       spacing: 20.w,
                       alignment: WrapAlignment.center,
                       children: [
-                        weatherInfo(title: "Wind", value: "234"),
+                        weatherInfo(
+                            title: "Wind",
+                            value: "234",
+                            textTheme: theme.textTheme),
                         myDivider(),
-                        weatherInfo(title: "Temp", value: "30°C"),
+                        weatherInfo(
+                            title: "Temp",
+                            value: "30°C",
+                            textTheme: theme.textTheme),
                         myDivider(),
-                        weatherInfo(title: "Humidity", value: "25%")
+                        weatherInfo(
+                            title: "Humidity",
+                            value: "25%",
+                            textTheme: theme.textTheme)
                       ],
                     ),
                   ),
@@ -239,21 +243,21 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget weatherInfo({title, value}) {
+  Widget weatherInfo({title, value, TextTheme? textTheme}) {
     return Column(
       children: [
         Text(
           title,
-          style: kAppbarThin.copyWith(
+          style: textTheme!.bodyText2!.copyWith(
             fontSize: 17.sp,
-            color: kPrimaryColor,
+            fontWeight: FontWeight.w300,
           ),
         ),
         Text(
           value,
-          style: kAppbarBold.copyWith(
-            color: kPrimaryColor,
+          style: textTheme.bodyText2!.copyWith(
             fontSize: 32.sp,
+            fontWeight: FontWeight.bold,
           ),
         )
       ],

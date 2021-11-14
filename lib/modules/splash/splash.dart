@@ -27,14 +27,16 @@ class _SplashState extends State<Splash> {
               ListTile(
                 title: Text(
                   "Daily",
-                  style: kAppbarThin.copyWith(
-                    fontFamily: ConstanceData.kohoRegular,
+                  style: theme.textTheme.bodyText2!.copyWith(
+                    fontSize: 25.sp,
+                    color: theme.accentColor,
                   ),
                 ),
                 subtitle: Text(
                   "Weather",
-                  style: kAppbarBold.copyWith(
-                    fontFamily: ConstanceData.kohoBold,
+                  style: theme.textTheme.bodyText1!.copyWith(
+                    fontSize: 30.sp,
+                    color: kAccentColor,
                   ),
                 ),
               ),
@@ -68,11 +70,7 @@ class _SplashState extends State<Splash> {
                     child: Center(
                         child: Text(
                       "Continue",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.sp,
-                        fontFamily: ConstanceData.kohoRegular,
-                      ),
+                      style: theme.textTheme.headline2,
                     )),
                   ),
                 ),

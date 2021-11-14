@@ -9,31 +9,39 @@ const Color kBackGroundColor = Color(0xffF4F7FE);
 class CustomTheme {
   //light theme
   static TextTheme textTheme = TextTheme(
-      bodyText1: TextStyle(
-        fontSize: 30.sp,
-        color: kAccentColor,
-        fontFamily: ConstanceData.kohoBold,
-      ),
-      bodyText2: TextStyle(
-        fontSize: 25.sp,
-        color: kAccentColor,
-        fontFamily: ConstanceData.kohoRegular,
-      ),
-      caption: TextStyle(
-        fontFamily: ConstanceData.kohoRegular,
-        color: Colors.white,
-        fontSize: 15.sp,
-        fontWeight: FontWeight.w500,
-      ),
-      button: TextStyle(
-        fontFamily: ConstanceData.kohoRegular,
-        color: kAccentColor,
-        fontSize: 15.sp,
-        fontWeight: FontWeight.w200,
-      ));
+    bodyText1: TextStyle(
+      fontSize: 50.sp,
+      color: kAccentColor,
+      fontFamily: ConstanceData.kohoBold,
+    ),
+    bodyText2: TextStyle(
+      fontSize: 25.sp,
+      color: kAccentColor,
+      fontFamily: ConstanceData.kohoRegular,
+    ),
+    caption: TextStyle(
+      fontFamily: ConstanceData.kohoRegular,
+      color: Colors.white,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w500,
+    ),
+    button: TextStyle(
+      fontFamily: ConstanceData.kohoRegular,
+      color: kAccentColor,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w200,
+    ),
+    headline2: TextStyle(
+      color: Colors.white,
+      fontSize: 18.sp,
+      fontFamily: ConstanceData.kohoRegular,
+    ),
+  );
 
   static ThemeData themeData() {
     return ThemeData(
+      brightness: Brightness.light,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
       iconTheme: IconThemeData(color: Colors.white),
       backgroundColor: kBackGroundColor,
       scaffoldBackgroundColor: kBackGroundColor,
@@ -46,15 +54,15 @@ class CustomTheme {
   }
 }
 
-const Duration kDuration = Duration(milliseconds: 300);
 
-TextStyle kAppbarThin = TextStyle(
-  fontSize: 25.sp,
-  color: kAccentColor,
-  fontFamily: "Koho",
-);
-TextStyle kAppbarBold = TextStyle(
-  fontSize: 30.sp,
-  color: kAccentColor,
-  fontFamily: "Koho Bold",
-);
+
+// TextStyle kAppbarThin = TextStyle(
+//   fontSize: 25.sp,
+//   color: kAccentColor,
+//   fontFamily: "Koho",
+// );
+// TextStyle kAppbarBold = TextStyle(
+//   fontSize: 30.sp,
+//   color: kAccentColor,
+//   fontFamily: "Koho Bold",
+// );
