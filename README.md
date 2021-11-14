@@ -20,10 +20,16 @@ Flutter 2.5
 - Any IDE with Flutter SDK installed (ie. IntelliJ, Android Studio, VSCode etc)
 - A little knowledge of Dart and Flutter
 
+
+<a href="apk/weather-app.apk"><img src="https://playerzon.com/asset/download.png" width="200"></img></a>
+
+
 # Screenshots
 
 
  ![Dribbble](screenshots/weather.png)
+
+
 
 
 
@@ -57,7 +63,9 @@ flutter build apk
 - [fl_chart](https://pub.dev/packages/fl_chart)
 
 
-## DribBble Link
+
+
+## Dribbble Link
 [Dribble](https://dribbble.com/shots/14807515-Daily-Weather-Prediction)
  
 
