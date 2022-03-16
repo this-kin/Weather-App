@@ -3,16 +3,13 @@
 ![Version](https://img.shields.io/badge/version-2.0.0-blue.svg?cacheSeconds=2592000)
 [![License: APACHE](https://img.shields.io/badge/License-APACHE-yellow.svg)](#)
 
- ![Logo](assets/images/lightning.png)
+![Logo](assets/images/lightning.png)
 
-
-
-A Weather Forecast App built with Flutter
+A Weather Forecast App built with Flutter with Riverpod
 
 # Flutter Version
+
 Flutter 2.5
-
-
 
 # 💻 Requirements
 
@@ -20,20 +17,14 @@ Flutter 2.5
 - Any IDE with Flutter SDK installed (ie. IntelliJ, Android Studio, VSCode etc)
 - A little knowledge of Dart and Flutter
 
-
 <a href="apk/weather-app.apk"><img src="https://playerzon.com/asset/download.png" width="200"></img></a>
-
 
 # Screenshots
 
-
- ![Dribbble](screenshots/weather.png)
-
-
-
-
+![Dribbble](screenshots/weather.png)
 
 # Command
+
 ### Install dependencies
 
 ```sh
@@ -54,6 +45,7 @@ flutter build apk
 ```
 
 # Plugins
+
 - [flutter_screenutil](https://pub.dev/packages/flutter_screenutil)
 - [google_nav_bar](https://pub.dev/packages/google_nav_bar)
 - [mvc_pattern](https://pub.dev/packages/mvc_pattern)
@@ -62,22 +54,17 @@ flutter build apk
 - [fluttericon](https://pub.dev/packages/fluttericon)
 - [fl_chart](https://pub.dev/packages/fl_chart)
 
-
-
-
 ## Dribbble Link
-[Dribble](https://dribbble.com/shots/14807515-Daily-Weather-Prediction)
- 
 
+[Dribble](https://dribbble.com/shots/14807515-Daily-Weather-Prediction)
 
 ## Author
 
 👤 **Flutter BoyFriend**
 
-* Github: [@FlutterBoyfriend](https://github.com/FlutterBoyfriend)
+- Github: [@FlutterBoyfriend](https://github.com/FlutterBoyfriend)
 
 ## Show your support
 
 Give a ⭐️ if you like this project! all contributions 👏✍ and PRs 🖖🤞 are welcome 🤝🙏
-you can also create issues if you detect any bug 🦟🦟 
-
+you can also create issues if you detect any bug 🦟🦟
